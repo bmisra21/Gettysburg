@@ -23,29 +23,32 @@ public class Main {
 			thing = file.next();
 			words.add(thing);
 		} 
-		
-		for (int i=0; i<words.size(); i++)
-		{
-			for (int h =0; h<words.get(i).length();h++) 
-			{
-				if (words.get(i).contains(",") || words.get(i).contains(".") || words.get(i).contains("-"))
-				{
-					words.add(i, words.get(i).substring(h));
-				}
-					
-			}
-			
-		} 
-		
-		for (int i=0; i<words.size(); i++)
+		/**for (int i=0; i<words.size(); i++)
 		{
 			System.out.println(words.get(i));
-		}
+		} */
 		double totalCount=0;
 		String longest=words.get(0);
 		for (int i=0; i<words.size(); i++)
 		{
-			if (words.get(i).length() > longest.length())
+			int length;
+			int location;
+			if (words.get(i).contains("-"))
+			{
+				location =  words.get(i).indexOf("-");
+				length = words.get(i).substring(0, location).length();
+			}
+			else if (words.get(i).contains("."))
+			{
+				location =  words.get(i).indexOf(".");
+				length = words.get(i).substring(0, location).length();
+			}
+			else if (words.get(i).contains(","))
+			{
+				location =  words.get(i).indexOf(",");
+				length = words.get(i).substring(0, location).length(); 
+			} else {length = words.get(i).length();}
+			if (length > longest.length())
 				longest = words.get(i);
 			totalCount = totalCount + words.get(i).length();
 		}
